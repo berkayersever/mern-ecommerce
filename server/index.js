@@ -107,3 +107,13 @@ app.delete('/api/products/:id', adminController.deleteProduct);
 
 // Then listen on the port.
 app.listen(PORT, () => console.log('Listening on Port:', PORT));
+
+// MongoDB Connection
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://admin:dQVSPw74huxCyzPq@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
