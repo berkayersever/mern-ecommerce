@@ -26,14 +26,6 @@
     "eject": "react-scripts eject"
   },
   "main": "server/",
-  "proxy": {
-    "/auth/callback": {
-      "target": "http://localhost:5000"
-    },
-    "/api": {
-      "target": "http://localhost:5000"
-    }
-  },
   "eslintConfig": {
     "extends": "react-app"
   },

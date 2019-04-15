@@ -38,9 +38,9 @@ const PORT = 5000;
 
 //Connect the mongoose to the database using it's connect method.
 mongoose.connect(process.env.CONNECTION_STRING,
-    { useNewUrlParser: true },
+    {useNewUrlParser: true},
     (err) => {
-        if(err) {
+        if (err) {
             console.log('Database Error----------------', err);
         }
         console.log('Connected to database');
@@ -78,7 +78,7 @@ app.get('/api/user-data', userController.readUserData);
 app.post('/api/user-data/cart', userController.addToCart);
 // Remove a item from the cart.
 // Use request parameter to remove item from cart since you are looking a specific item in cart.
-app.delete('/api/user-data/cart/:id',userController.removeFromCart);
+app.delete('/api/user-data/cart/:id', userController.removeFromCart);
 // When user login
 app.post('/api/login', userController.login)
 // NO NEED FOR A REGISTER SINCE YOUR ARE USING AUTH0.
@@ -111,7 +111,7 @@ app.listen(PORT, () => console.log('Listening on Port:', PORT));
 // MongoDB Connection
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://admin:dQVSPw74huxCyzPq@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, {useNewUrlParser: true});
 client.connect(err => {
     const collection = client.db("test").collection("devices");
     // perform actions on the collection object
