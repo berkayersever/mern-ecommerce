@@ -22,3 +22,6 @@ const cloudinaryController = require('./controllers/cloudinary_controller');
 const userController = require('./controllers/user_controller');
 // Set your products functionality.
 const productsController = require('./controllers/products_controller');
+
+// Import your mongoose module to connect to your mongodb database instance using it's connection string.
+const mongoose = require('mongoose');
