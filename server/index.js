@@ -28,3 +28,39 @@ const mongoose = require('mongoose');
 
 // Import your express server
 const express = require('express');
+
+// Set instance of the express server to a variable
+const app = express();
+
+// Define the Port your will be running your server on.
+// NOTE: Make sure the Port is the same as the proxy.
+const PORT = 5000;
+
+//Connect the mongoose to the database using it's connect method.
+mongoose.connect(process.env.CONNECTION_STRING,
+    { useNewUrlParser: true },
+    (err) => {
+        if(err) {
+            console.log('Database Error----------------', err);
+        }
+        console.log('Connected to database');
+    });
+
+// Middleware
+// For initializing the req.body. If the middleware is not used, the req.body is undefined.
+app.use(bodyParser.json());
+
+// For storing cookies for the user.
+app.use(session({
+// Create a secret for the cookie store it in .env file
+// Secret can be anything.
+    secret: process.env.SESSION_SECRET,
+// this for resaving the cookie false, if true can cause a memory leak.
+    resave: false,
+// saveUnitialized best false, unless connect to a database.
+    saveUninitialized: false,
+    cookie: {
+// The max age of the cookie
+        maxAge: 1000 * 60 * 60 * 24 * 14
+    }
+}));
