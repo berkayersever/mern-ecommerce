@@ -1,6 +1,6 @@
 // Enables the .env file, therefore add a env property to process object.
 // Recommend to require it at the top of the file
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 /* Middlewares */
 
@@ -37,14 +37,28 @@ const app = express();
 const PORT = 5000;
 
 //Connect the mongoose to the database using it's connect method.
-mongoose.connect(process.env.CONNECTION_STRING,
-    {useNewUrlParser: true},
+mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true},
     (err) => {
         if (err) {
             console.log('Database Error----------------', err);
         }
         console.log('Connected to database');
     });
+
+// const uri = process.env.CONNECTION_STRING;
+// console.log(uri);
+
+// mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true});
+
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://admin:<password>@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//     const collection = client.db("test").collection("devices");
+//     // perform actions on the collection object
+//     client.close();
+// });
+
 
 // Middleware
 // For initializing the req.body. If the middleware is not used, the req.body is undefined.
@@ -69,51 +83,50 @@ app.use(session({
 app.use(cors());
 
 setTimeout(() => {
-// All our endpoints.
+    // Read the user's session.
+    app.get('/api/user-data', userController.readUserData);
+    // Add a item to cart.
+    app.post('/api/user-data/cart', userController.addToCart);
+    // Remove a item from the cart.
+    // Use request parameter to remove item from cart since you are looking a specific item in cart.
+    app.delete('/api/user-data/cart/:id', userController.removeFromCart);
+    // When user login
+    app.post('/api/login', userController.login)
+    // NO NEED FOR A REGISTER SINCE YOUR ARE USING AUTH0.
+    // Just need a login, since you are logging from your social media provider no need to register, only looks if a user already has a account.
+    // When the user logouts
+    app.post('/api/logout', userController.logout);
+
+
+    // Products Endpoints
+    // Getting all the products
+    app.get('/api/products', productsController.readAllProducts);
+    // Getting a specified product
+    // Use a request parameter, since retrieving a specified product..
+    app.get('/api/products/:id', productsController.readProduct);
+
+
+    // Admin Endpoints
+    // Gets the admin users.
+    app.get('/api/users', adminController.getAdminUsers);
+    // When a admin creates a product. No need for request parameter in this case. Since we are inserting data to database.
+    app.post('/api/products', adminController.createProduct);
+    // When a admin update a current product. Need request parameter since updating a specific product based on  the id.
+    app.put('/api/products/:id', adminController.updateProduct);
+    // When a admin deletes a product, need an id to specify a product to delete.
+    app.delete('/api/products/:id', adminController.deleteProduct);
 }, 200)
 
-// Read the user's session.
-app.get('/api/user-data', userController.readUserData);
-// Add a item to cart.
-app.post('/api/user-data/cart', userController.addToCart);
-// Remove a item from the cart.
-// Use request parameter to remove item from cart since you are looking a specific item in cart.
-app.delete('/api/user-data/cart/:id', userController.removeFromCart);
-// When user login
-app.post('/api/login', userController.login)
-// NO NEED FOR A REGISTER SINCE YOUR ARE USING AUTH0.
-// Just need a login, since you are logging from your social media provider no need to register, only looks if a user already has a account.
-// When the user logouts
-app.post('/api/logout', userController.logout);
-
-
-// Products Endpoints
-// Getting all the products
-app.get('/api/products', productsController.readAllProducts);
-// Getting a specified product
-// Use a request parameter, since retrieving a specified product..
-app.get('/api/products/:id', productsController.readProduct);
-
-
-// Admin Endpoints
-// Gets the admin users.
-app.get('/api/users', adminController.getAdminUsers);
-// When a admin creates a product. No need for request parameter in this case. Since we are inserting data to database.
-app.post('/api/products', adminController.createProduct);
-// When a admin update a current product. Need request parameter since updating a specific product based on  the id.
-app.put('/api/products/:id', adminController.updateProduct);
-// When a admin deletes a product, need an id to specify a product to delete.
-app.delete('/api/products/:id', adminController.deleteProduct);
 
 // Then listen on the port.
 app.listen(PORT, () => console.log('Listening on Port:', PORT));
 
-// MongoDB Connection
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:dQVSPw74huxCyzPq@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, {useNewUrlParser: true});
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
+// // MongoDB Connection
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://admin:dQVSPw74huxCyzPq@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
+// const client = new MongoClient(uri, {useNewUrlParser: true});
+// client.connect(err => {
+//     const collection = client.db("test").collection("devices");
+//     // perform actions on the collection object
+//     client.close();
+// });
