@@ -1,5 +1,6 @@
 // This will be used to perform full crud in the database.
 // Make sure to import it outside of module.exports to have it accessible through out file.
+const mongoose = require('mongoose');
 const Product  = require('../models/product');
 module.exports = {
     readAllProducts(req, res) {
