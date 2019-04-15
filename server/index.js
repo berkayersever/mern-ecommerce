@@ -45,21 +45,6 @@ mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true},
         console.log('Connected to database');
     });
 
-// const uri = process.env.CONNECTION_STRING;
-// console.log(uri);
-
-// mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true});
-
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://admin:<password>@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
-
-
 // Middleware
 // For initializing the req.body. If the middleware is not used, the req.body is undefined.
 app.use(bodyParser.json());
@@ -120,13 +105,3 @@ setTimeout(() => {
 
 // Then listen on the port.
 app.listen(PORT, () => console.log('Listening on Port:', PORT));
-
-// // MongoDB Connection
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://admin:dQVSPw74huxCyzPq@e-commerce-database-xzmw7.mongodb.net/test?retryWrites=true";
-// const client = new MongoClient(uri, {useNewUrlParser: true});
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
