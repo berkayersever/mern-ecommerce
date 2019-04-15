@@ -64,3 +64,24 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 14
     }
 }));
+
+// Allow cross origin requests.
+app.use(cors());
+
+setTimeout(() => {
+// All our endpoints.
+}, 200)
+
+// Read the user's session.
+app.get('/api/user-data', userController.readUserData);
+// Add a item to cart.
+app.post('/api/user-data/cart', userController.addToCart);
+// Remove a item from the cart.
+// Use request parameter to remove item from cart since you are looking a specific item in cart.
+app.delete('/api/user-data/cart/:id',userController.removeFromCart);
+// When user login
+app.post('/api/login', userController.login)
+// NO NEED FOR A REGISTER SINCE YOUR ARE USING AUTH0.
+// Just need a login, since you are logging from your social media provider no need to register, only looks if a user already has a account.
+// When the user logouts
+app.post('/api/logout', userController.logout);
