@@ -85,3 +85,11 @@ app.post('/api/login', userController.login)
 // Just need a login, since you are logging from your social media provider no need to register, only looks if a user already has a account.
 // When the user logouts
 app.post('/api/logout', userController.logout);
+
+
+// Products Endpoints
+// Getting all the products
+app.get('/api/products', productsController.readAllProducts);
+// Getting a specified product
+// Use a request parameter, since retrieving a specified product..
+app.get('/api/products/:id', productsController.readProduct);
