@@ -28,6 +28,9 @@
     "deploy": "now --public --dotenv=.env.prod -d"
   },
   "main": "server/",
+  "now": {
+    "alias": "poke-store"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
