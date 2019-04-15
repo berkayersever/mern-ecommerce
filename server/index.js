@@ -25,3 +25,6 @@ const productsController = require('./controllers/products_controller');
 
 // Import your mongoose module to connect to your mongodb database instance using it's connection string.
 const mongoose = require('mongoose');
+
+// Import your express server
+const express = require('express');
