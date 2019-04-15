@@ -104,3 +104,6 @@ app.post('/api/products', adminController.createProduct);
 app.put('/api/products/:id', adminController.updateProduct);
 // When a admin deletes a product, need an id to specify a product to delete.
 app.delete('/api/products/:id', adminController.deleteProduct);
+
+// Then listen on the port.
+app.listen(PORT, () => console.log('Listening on Port:', PORT));
