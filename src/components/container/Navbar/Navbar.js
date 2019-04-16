@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './Navbar.css';                                                                      // Import the css file for styling.
+require('dotenv').config({path: '../../../../.env'});
 
 export class Navbar extends Component {
     linkFunc(path) {
