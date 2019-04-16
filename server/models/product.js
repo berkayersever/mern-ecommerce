@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 // Need an ID, name, description, price,
 // ID is created by default in MongoDB
 const product = new Schema({
+    // id: String,
     name: String,
     description: String,
     price: Number

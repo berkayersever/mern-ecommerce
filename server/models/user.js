@@ -15,4 +15,4 @@ const user = new Schema({
 
 // Export the model on the Mongoose.
 // So this model will be inserted to the database.
-module.exports = mongoose.model('User', user)
+module.exports = mongoose.model('User', user);

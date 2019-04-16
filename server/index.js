@@ -100,7 +100,7 @@ setTimeout(() => {
     app.put('/api/products/:id', adminController.updateProduct);
     // When a admin deletes a product, need an id to specify a product to delete.
     app.delete('/api/products/:id', adminController.deleteProduct);
-}, 200)
+}, 200);
 
 
 // Then listen on the port.

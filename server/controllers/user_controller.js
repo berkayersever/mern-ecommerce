@@ -31,11 +31,12 @@ module.exports = {
                 req.session.save();
                 //Save the newUser instance to mongodb
                 newUser.save();
-                res.status(200).json({user: newUser});
+                return res.status(200).json({user: newUser});
             }
             req.session.user = user;
             req.session.save();
             res.status(200).json({user: req.session.user});
+            // res.status(200).json({ error: 'message' });
         })
     },
     logout(req, res) {
