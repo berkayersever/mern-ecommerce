@@ -7,7 +7,8 @@ const product = new Schema({
     // id: String,
     name: String,
     description: String,
-    price: Number
+    price: Number,
+    picture: String
 });
 
 // To create a model, use the name of the model, and the schema with the properties of the model
