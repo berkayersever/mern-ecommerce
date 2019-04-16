@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import './Navbar.css';              // Import the css file for styling.
 
 class Navbar extends Component {
+    linkFunc(path) {
+        this.props.history.push(path);
+    }
     render() {
         return (
             <div className='nav container'>
