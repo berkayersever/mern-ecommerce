@@ -1,0 +1,422 @@
+{
+  "id": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+  "name": "mern-ecommerce",
+  "description": "",
+  "auth": null,
+  "events": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "1ff4b206-388b-48d6-8a4c-e040e2f1b293",
+        "type": "text\/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "71991688-5f49-4e6e-9a1f-38edbc605a3e",
+        "type": "text\/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variables": [],
+  "order": [
+    "c376d03f-22c5-4b71-8f82-c00fc9f47a1a",
+    "8695c095-8ebe-4148-ad26-ba03c3c31d82",
+    "8a779823-69e8-462d-9242-d3730f81fc30",
+    "92548209-b4b3-4ccc-a753-22774346e07d",
+    "88fea63f-2962-4f61-a542-e16bf8edd845",
+    "da8b513d-55a1-43ea-a382-283fadfde8bc",
+    "2aec1a33-e63f-4da7-accc-188aee67f104"
+  ],
+  "folders_order": [],
+  "folders": [],
+  "requests": [
+    {
+      "id": "2aec1a33-e63f-4da7-accc-188aee67f104",
+      "name": "Create Product",
+      "url": "http:\/\/localhost:5000\/api\/products",
+      "description": "",
+      "data": [],
+      "dataMode": "raw",
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application\/json",
+          "description": ""
+        }
+      ],
+      "method": "POST",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "ea05c204-9b07-473b-961c-deebe866f620",
+            "exec": [
+              "\/\/ Set the body of the response to variable, since we are gonna test if they have the right properties.\r",
+              "const requestBody = pm.request.body.raw;\r",
+              "\r",
+              "\/\/ Set the responseTime of the response to a variable, since we are gonna test the amount of time to takes for the response.\r",
+              "const resTime = pm.response.responseTime;\r",
+              "\r",
+              "\/\/ Check the amount of time it takes for creating the data.\r",
+              "pm.test('Check if the amount of time it takes to create the data is less than 200ms', () => {\r",
+              "    pm.expect(resTime).to.be.below(200);    \/\/ Use the to.be.below if it is less than a certain number, in this case if it is less than 200 milliseconds.\r",
+              "});\r",
+              "\r",
+              "\/\/ Since the raw data of the body is a string. Check if it includes name: Basketball.\r",
+              "pm.test('Name of the created product is named correctly.', function() {\r",
+              "    pm.expect(requestBody).to.include('\"name\": \"Basketball\"');\r",
+              "});\r",
+              "\r",
+              "\/\/ Now make it purposely make it fail by checking if description is equal to Basketball.\r",
+              "pm.test('New created product has right description.', function() {\r",
+              "    pm.expect(requestBody).to.include('\"description\": \"Basketball\"');\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Set the body of the response to variable, since we are gonna test if they have the right properties.\r\nconst requestBody = pm.request.body.raw;\r\n\r\n\/\/ Set the responseTime of the response to a variable, since we are gonna test the amount of time to takes for the response.\r\nconst resTime = pm.response.responseTime;\r\n\r\n\/\/ Check the amount of time it takes for creating the data.\r\npm.test('Check if the amount of time it takes to create the data is less than 200ms', () => {\r\n    pm.expect(resTime).to.be.below(200);    \/\/ Use the to.be.below if it is less than a certain number, in this case if it is less than 200 milliseconds.\r\n});\r\n\r\n\/\/ Since the raw data of the body is a string. Check if it includes name: Basketball.\r\npm.test('Name of the created product is named correctly.', function() {\r\n    pm.expect(requestBody).to.include('\"name\": \"Basketball\"');\r\n});\r\n\r\n\/\/ Now make it purposely make it fail by checking if description is equal to Basketball.\r\npm.test('New created product has right description.', function() {\r\n    pm.expect(requestBody).to.include('\"description\": \"Basketball\"');\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "rawModeData": "{\n\t\"name\": \"Basketball\",\n\t\"description\": \"A Nice Basketball\",\n\t\"price\": 50\n}",
+      "headers": "Content-Type: application\/json\n",
+      "pathVariables": []
+    },
+    {
+      "id": "8695c095-8ebe-4148-ad26-ba03c3c31d82",
+      "name": "Login User",
+      "url": "http:\/\/localhost:5000\/api\/login",
+      "description": "",
+      "data": [],
+      "dataMode": "raw",
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application\/json"
+        }
+      ],
+      "method": "POST",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "4c6f1e1b-edaa-4d75-8696-b4ef44b0582d",
+            "exec": [
+              "\/\/ Set the request body from the request body to a variable, since we are gonna check if a auth0_id is being passed in.\r",
+              "const requestBody = pm.request.body.raw;\r",
+              "\r",
+              "\/\/ Set the time of the response to a variable, since we are checking if the responseTime is lower than a specified number.\r",
+              "const resTime = pm.response.responseTime;\r",
+              "\r",
+              "\/\/ Initiate the test to test if the responseTime is lower than a given number.\r",
+              "pm.test('Check is response is lower than 200 milliseconds', () => {\r",
+              "    pm.expect(resTime).to.be.below(200);\r",
+              "});\r",
+              "\r",
+              "\/\/ Now test if the request body has a auth0_id, via include.\r",
+              "pm.test('Check if the requestBody string includes a auth0_id', () => {\r",
+              "    pm.expect(requestBody).to.include('\"sub\": \"github|28241274\"');\r",
+              "});\r",
+              "\r",
+              "\/\/ Now make the test purposely fail, by checking if auth0_id contains the wrong property\r",
+              "pm.test('Check if the requestBody string includes auth0_id to have wrong property', () => {\r",
+              "    pm.expect(requestBody).to.include('\"sub\": \"Berkay Ersever\"');\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Set the request body from the request body to a variable, since we are gonna check if a auth0_id is being passed in.\r\nconst requestBody = pm.request.body.raw;\r\n\r\n\/\/ Set the time of the response to a variable, since we are checking if the responseTime is lower than a specified number.\r\nconst resTime = pm.response.responseTime;\r\n\r\n\/\/ Initiate the test to test if the responseTime is lower than a given number.\r\npm.test('Check is response is lower than 200 milliseconds', () => {\r\n    pm.expect(resTime).to.be.below(200);\r\n});\r\n\r\n\/\/ Now test if the request body has a auth0_id, via include.\r\npm.test('Check if the requestBody string includes a auth0_id', () => {\r\n    pm.expect(requestBody).to.include('\"sub\": \"github|28241274\"');\r\n});\r\n\r\n\/\/ Now make the test purposely fail, by checking if auth0_id contains the wrong property\r\npm.test('Check if the requestBody string includes auth0_id to have wrong property', () => {\r\n    pm.expect(requestBody).to.include('\"sub\": \"Berkay Ersever\"');\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "rawModeData": "{\n\t  \"sub\": \"github|28241274\",\n\t  \"nickname\": \"berkayersever\",\n\t  \"name\": \"Berkay Ersever\",\n\t  \"picture\": \"https:\/\/avatars2.githubusercontent.com\/u\/28241274\"\n}",
+      "headers": "Content-Type: application\/json\n",
+      "pathVariables": []
+    },
+    {
+      "id": "88fea63f-2962-4f61-a542-e16bf8edd845",
+      "name": "Get Product",
+      "url": "http:\/\/localhost:5000\/api\/products\/5cb5f22424b3e00c9c6aabb8",
+      "description": "",
+      "data": null,
+      "dataMode": null,
+      "headerData": [],
+      "method": "GET",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "14322381-8238-4a00-879a-f725ced0898b",
+            "exec": [
+              "\/\/ Get the current response from the postman global object which will be of type json.\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check if the status code is 200', () => {\r",
+              "    pm.response.to.have.status(200);                    \/\/ Use chai language chains to improve the readability of the test on the pm object.\r",
+              "});\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check if the response is an object', () => {   \/\/ Test if the resposne is an array.\r",
+              "    pm.expect(response).to.be.an('object');             \/\/ Use chai language chains to improve the readability of the test on the pm object.\r",
+              "});\r",
+              "\r",
+              "\/\/ Now we are gonna make it purposely fail.\r",
+              "pm.test('Check if the response is an array', () => {    \/\/ Test if the response is an object.\r",
+              "    pm.expect(response).to.be.an('array');              \/\/ Use chai language chains to improve the readability of the test on the response VARIABLE.\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Get the current response from the postman global object which will be of type json.\r\nconst response = pm.response.json();\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check if the status code is 200', () => {\r\n    pm.response.to.have.status(200);                    \/\/ Use chai language chains to improve the readability of the test on the pm object.\r\n});\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check if the response is an object', () => {   \/\/ Test if the resposne is an array.\r\n    pm.expect(response).to.be.an('object');             \/\/ Use chai language chains to improve the readability of the test on the pm object.\r\n});\r\n\r\n\/\/ Now we are gonna make it purposely fail.\r\npm.test('Check if the response is an array', () => {    \/\/ Test if the response is an object.\r\n    pm.expect(response).to.be.an('array');              \/\/ Use chai language chains to improve the readability of the test on the response VARIABLE.\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "headers": "",
+      "pathVariables": []
+    },
+    {
+      "id": "8a779823-69e8-462d-9242-d3730f81fc30",
+      "name": "Delete Product",
+      "url": "http:\/\/localhost:5000\/api\/products\/5cb5f22424b3e00c9c6aabb8",
+      "description": "",
+      "data": [],
+      "dataMode": "params",
+      "headerData": [],
+      "method": "DELETE",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a0fc1620-df05-4edb-9d7a-520518566614",
+            "exec": [
+              "\/\/ Get the current response from the postman global object which will be of type json.\r",
+              "let response = pm.response.json();\r",
+              "const requestUrl = pm.request.url;\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('check the status code is 200', () => {\r",
+              "    pm.response.to.have.status(200);                                            \/\/ Use chai language chains to improve the readability of the test on the pm object.\r",
+              "});\r",
+              "\r",
+              "\/\/ Do a pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check is the url has the right id', () => {\r",
+              "    pm.expect(requestUrl.toString()).to.include('5cb5f22424b3e00c9c6aabb8');    \/\/ Convert the requestUrl to a string, and see if it includes the correct id.\r",
+              "});\r",
+              "\r",
+              "\/\/ Now we are gonna make it purposely fail.\r",
+              "pm.test('check if response is a array', () => {                                 \/\/ Test if the response is an object.\r",
+              "    pm.expect(response).to.be.an('array');                                      \/\/ Use chai language chains to improve the readability of the test on the response VARIABLE. \r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Get the current response from the postman global object which will be of type json.\r\nlet response = pm.response.json();\r\nconst requestUrl = pm.request.url;\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('check the status code is 200', () => {\r\n    pm.response.to.have.status(200);                                            \/\/ Use chai language chains to improve the readability of the test on the pm object.\r\n});\r\n\r\n\/\/ Do a pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check is the url has the right id', () => {\r\n    pm.expect(requestUrl.toString()).to.include('5cb5f22424b3e00c9c6aabb8');    \/\/ Convert the requestUrl to a string, and see if it includes the correct id.\r\n});\r\n\r\n\/\/ Now we are gonna make it purposely fail.\r\npm.test('check if response is a array', () => {                                 \/\/ Test if the response is an object.\r\n    pm.expect(response).to.be.an('array');                                      \/\/ Use chai language chains to improve the readability of the test on the response VARIABLE. \r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "headers": "",
+      "pathVariables": []
+    },
+    {
+      "id": "92548209-b4b3-4ccc-a753-22774346e07d",
+      "name": "Update Product",
+      "url": "http:\/\/localhost:5000\/api\/products\/5cb5f22424b3e00c9c6aabb8",
+      "description": "",
+      "data": [],
+      "dataMode": "raw",
+      "headerData": [
+        {
+          "key": "Content-Type",
+          "value": "application\/json"
+        }
+      ],
+      "method": "PUT",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "7a338414-ff17-453e-b382-eab421edd187",
+            "exec": [
+              "\/\/ Testing if we got the right id, by setting the requestUrl to request.url.toString()\r",
+              "const requestUrl = pm.request.url.toString();\r",
+              "\r",
+              "\/\/ Test if we got a right name from our requestBody \r",
+              "const requestBody = pm.request.body.raw;\r",
+              "\r",
+              "\/\/ Test if the responseTime is less than 200 ms, must get responseTime.\r",
+              "const resTime = pm.response.responseTime;\r",
+              "\r",
+              "\/\/ Test if the responseTime is less than 200 ms\r",
+              "pm.test('Test if responseTime is less than 200 milliseconds', () => {\r",
+              "    pm.expect(resTime).to.below(200);\r",
+              "});\r",
+              "\r",
+              "\/\/ Test if the request body contains right property.\r",
+              "pm.test('Test if the name is Soccerball by checking if it includes name: Soccerball', () => {\r",
+              "    pm.expect(requestBody).to.include('\"name\": \"Soccer Ball\"');\r",
+              "});\r",
+              "\r",
+              "\/\/ Test if the url includes the correct id.\r",
+              "pm.test('Test if the url includes the correct id', () => {\r",
+              "    pm.expect(requestUrl).to.include('5cb5f22424b3e00c9c6aabb8');\r",
+              "});\r",
+              "\r",
+              "\/\/ Now make the test purposely fail.\r",
+              "pm.test('Test if the responseTime is more than 200 milliseconds', () => {\r",
+              "    pm.expect(resTime).to.above(200);       \/\/Use to.above to check if the responseTime is greater than 200 milliseconds\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Testing if we got the right id, by setting the requestUrl to request.url.toString()\r\nconst requestUrl = pm.request.url.toString();\r\n\r\n\/\/ Test if we got a right name from our requestBody \r\nconst requestBody = pm.request.body.raw;\r\n\r\n\/\/ Test if the responseTime is less than 200 ms, must get responseTime.\r\nconst resTime = pm.response.responseTime;\r\n\r\n\/\/ Test if the responseTime is less than 200 ms\r\npm.test('Test if responseTime is less than 200 milliseconds', () => {\r\n    pm.expect(resTime).to.below(200);\r\n});\r\n\r\n\/\/ Test if the request body contains right property.\r\npm.test('Test if the name is Soccerball by checking if it includes name: Soccerball', () => {\r\n    pm.expect(requestBody).to.include('\"name\": \"Soccer Ball\"');\r\n});\r\n\r\n\/\/ Test if the url includes the correct id.\r\npm.test('Test if the url includes the correct id', () => {\r\n    pm.expect(requestUrl).to.include('5cb5f22424b3e00c9c6aabb8');\r\n});\r\n\r\n\/\/ Now make the test purposely fail.\r\npm.test('Test if the responseTime is more than 200 milliseconds', () => {\r\n    pm.expect(resTime).to.above(200);       \/\/Use to.above to check if the responseTime is greater than 200 milliseconds\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "rawModeData": "{\n\t\"name\": \"Soccer Ball\",\n\t\"description\": \"A nice soccer ball\",\n\t\"price\": 10\n}",
+      "headers": "Content-Type: application\/json\n",
+      "pathVariables": []
+    },
+    {
+      "id": "c376d03f-22c5-4b71-8f82-c00fc9f47a1a",
+      "name": "Get All Users",
+      "url": "http:\/\/localhost:5000\/api\/users",
+      "description": null,
+      "data": null,
+      "dataMode": null,
+      "headerData": [],
+      "method": "GET",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "60b1feaa-4aed-4f85-acbb-7ad462bc4f9a",
+            "exec": [
+              "\/\/ Get the current response from the postman global object which will be of type json.\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check if the status code is 200', () => {\r",
+              "    pm.response.to.have.status(200);    \/\/ Use chai language chains to improve the readability of the test on the pm object.\r",
+              "});\r",
+              "\r",
+              "\/\/ Now we are gonna make it purposely fail.\r",
+              "pm.test('Check if the status code is 201', () => {\r",
+              "    response.to.have.status(201);       \/\/Use chai language chains to improve the readability of the test on the response VARIABLE.\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Get the current response from the postman global object which will be of type json.\r\nconst response = pm.response.json();\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check if the status code is 200', () => {\r\n    pm.response.to.have.status(200);    \/\/ Use chai language chains to improve the readability of the test on the pm object.\r\n});\r\n\r\n\/\/ Now we are gonna make it purposely fail.\r\npm.test('Check if the status code is 201', () => {\r\n    response.to.have.status(201);       \/\/Use chai language chains to improve the readability of the test on the response VARIABLE.\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "headers": "",
+      "pathVariables": []
+    },
+    {
+      "id": "da8b513d-55a1-43ea-a382-283fadfde8bc",
+      "name": "Get All Products",
+      "url": "http:\/\/localhost:5000\/api\/products",
+      "description": "",
+      "data": null,
+      "dataMode": null,
+      "headerData": [],
+      "method": "GET",
+      "pathVariableData": [],
+      "queryParams": [],
+      "auth": null,
+      "events": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "bb9bcf4b-5497-46de-b0df-1c3ceb3da1cb",
+            "exec": [
+              "\/\/ Get the current response from the postman global object which will be of type json.\r",
+              "const response = pm.response.json();\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check if the status code is 200', () => {\r",
+              "    \/\/Use chai language chains to improve the readability of the test on the pm object.\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r",
+              "pm.test('Check if the response is an array', () => {\r",
+              "    \/\/Use chai language chains to improve the readability of the test on the pm object.\r",
+              "    \/\/Test if the resposne is an array\r",
+              "    pm.expect(response).to.be.an('array');\r",
+              "});\r",
+              "\r",
+              "\/\/ Now we are gonna make it purposely fail.\r",
+              "pm.test('Check if the response is an object', () => {\r",
+              "    \/\/Use chai language chains to improve the readability of the test on the response VARIABLE. \r",
+              "    \/\/Test if the response is an object \r",
+              "    pm.expect(response).to.be.an('object');\r",
+              "});"
+            ],
+            "type": "text\/javascript"
+          }
+        }
+      ],
+      "folder": null,
+      "preRequestScript": null,
+      "tests": "\/\/ Get the current response from the postman global object which will be of type json.\r\nconst response = pm.response.json();\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check if the status code is 200', () => {\r\n    \/\/Use chai language chains to improve the readability of the test on the pm object.\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\n\/\/ Do the pm.test to perform a test with a note, which can be anything, and a callback performing the test.\r\npm.test('Check if the response is an array', () => {\r\n    \/\/Use chai language chains to improve the readability of the test on the pm object.\r\n    \/\/Test if the resposne is an array\r\n    pm.expect(response).to.be.an('array');\r\n});\r\n\r\n\/\/ Now we are gonna make it purposely fail.\r\npm.test('Check if the response is an object', () => {\r\n    \/\/Use chai language chains to improve the readability of the test on the response VARIABLE. \r\n    \/\/Test if the response is an object \r\n    pm.expect(response).to.be.an('object');\r\n});",
+      "currentHelper": null,
+      "helperAttributes": null,
+      "collectionId": "d970bb80-c20f-4820-9c0e-ca7cd15bf1de",
+      "headers": "",
+      "pathVariables": []
+    }
+  ]
+}
