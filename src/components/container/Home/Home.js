@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';  // Import axios to call your backend.
 
 export default class Home extends Component {
     constructor() {
