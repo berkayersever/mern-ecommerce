@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Navbar as ReactNavbar } from 'react-bootstrap';
-import { Button, Image, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
+import { Button, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 // import { Button, Nav, NavDropdown, MenuItem, NavItem, Form, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -45,17 +45,9 @@ export class Navbar extends Component {
                         </Nav>
                         <Nav className="mr-auto">
                             <Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} reoundedCircle>
-                                {this.props.user ? <Nav>Logout</Nav> : <Nav>Login</Nav>}
+                                {this.props.user ? <Nav>{this.props.user.username}</Nav> : <Nav>Login</Nav>}
                             </Nav.Link>
-                            {/*<Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} >*/}
-                            {/*{this.props.user ?*/}
-                            {/*<Nav.Link>Logout</Nav.Link>*/}
-                            {/*// <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />*/}
-                            {/*: <Nav.Link>Login</Nav.Link>}*/}
-                            {/*</Nav.Link>*/}
                         </Nav>
-
-
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                             <Button variant="outline-success">Search</Button>
