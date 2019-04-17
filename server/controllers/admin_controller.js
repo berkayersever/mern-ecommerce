@@ -9,12 +9,13 @@ module.exports = {
     },
     createProduct(req, res) {
         // Destruct the values sent in from frontend from req.body;
-        const {name, description, price} = req.body;
+        const { name, description, price, picture } = req.body;
         // Have a new Product model instance set to a variable to be save to database.
         let newProduct = new Product({
             name,
             description,
-            price
+            price,
+            picture
         });
         // Use the .save() to save model to database.
         newProduct.save();
@@ -26,7 +27,7 @@ module.exports = {
         // Destruct the id from the request params.
         const { id } = req.params;
         // Destruct the update data from the req.body,
-        const { name, description, price } = req.body;
+        const { name, description, price, picture } = req.body;
         // Find the product, and update it's properties
         Product.findById(id).exec((err, product) => {
             if(err) {
@@ -36,10 +37,9 @@ module.exports = {
             product.name = name;
             product.description = description;
             product.price = price;
-            // Save the product with updated data.
-            product.save();
-            // Then send back the data, just for testing purposes.
-            res.status(200).json({product});
+            product.picture = picture;          // Update the product picture.
+            product.save();                     // Save the product with updated data.
+            res.status(200).json({product});    // Then send back the data, just for testing purposes.
         })
     },
     // updateProduct(req, res) {
