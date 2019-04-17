@@ -35,14 +35,6 @@ export class Navbar extends Component {
                             <Nav.Link onClick={() => this.linkFunc('/')}>Home</Nav.Link>
                             <Nav.Link onClick={() => this.linkFunc('/about')}>About</Nav.Link>
                             <Nav.Link onClick={() => this.linkFunc('/cart')}>Cart</Nav.Link>
-
-                            <Nav.Link onClick={() => this.props.user ? this.logout() : this.login()}>
-                                {this.props.user ?
-                                    <Nav>Logout</Nav>
-                                    // <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />
-                                    : <Nav>Login</Nav>}
-                            </Nav.Link>
-
                             <NavDropdown title="Profile" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -50,13 +42,26 @@ export class Navbar extends Component {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown>
+                        </Nav>
+                        <Nav className="mr-auto">
+                            <Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} reoundedCircle>
+                                {this.props.user ? (
+                                        <Nav>
+                                            Logout
+                                            <Image className='user-image' src={this.props.user.profile_picture} alt={this.props.user.nickname} rounded />
+                                        </Nav>
+                                     )
+                                    : <Nav>Login</Nav>}
+                            </Nav.Link>
                             {/*<Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} >*/}
-                                {/*{this.props.user ?*/}
-                                        {/*<Nav.Link>Logout</Nav.Link>*/}
-                                        {/*// <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />*/}
-                                    {/*: <Nav.Link>Login</Nav.Link>}*/}
+                            {/*{this.props.user ?*/}
+                            {/*<Nav.Link>Logout</Nav.Link>*/}
+                            {/*// <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />*/}
+                            {/*: <Nav.Link>Login</Nav.Link>}*/}
                             {/*</Nav.Link>*/}
                         </Nav>
+
+
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                             <Button variant="outline-success">Search</Button>

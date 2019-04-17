@@ -15,7 +15,7 @@
 
 /*.nav-link {*/
     /*height: 100%;*/
-    /*font-size: 2em;*/
+    /*font-size: 1em;*/
     /*color: #fff;*/
 /*}*/
 
@@ -47,9 +47,9 @@
     /*align-items: center;*/
 /*}*/
 
-/*.user-image {*/
-    /*height: 75%;*/
-    /*padding: 5%;*/
-    /*width: 30%;*/
-    /*border-radius: 50%;*/
-/*}*/
+.user-image {
+    height: 80px;
+    padding: 5%;
+    width: 80px;
+    border-radius: 50%;
+}
