@@ -68,6 +68,8 @@ app.use(session({
 app.use(cors());
 
 setTimeout(() => {
+    // Now setup cloudinary this endpoint will get the credentials from cloudinary_controller which will be signed.
+    app.get('/api/upload', cloudinaryController.upload);
     // Read the user's session.
     app.get('/api/user-data', userController.readUserData);
     // Add a item to cart.
