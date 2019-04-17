@@ -45,13 +45,7 @@ export class Navbar extends Component {
                         </Nav>
                         <Nav className="mr-auto">
                             <Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} reoundedCircle>
-                                {this.props.user ? (
-                                        <Nav>
-                                            Logout
-                                            <Image className='user-image' src={this.props.user.profile_picture} alt={this.props.user.nickname} rounded />
-                                        </Nav>
-                                     )
-                                    : <Nav>Login</Nav>}
+                                {this.props.user ? <Nav>Logout</Nav> : <Nav>Login</Nav>}
                             </Nav.Link>
                             {/*<Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} >*/}
                             {/*{this.props.user ?*/}
