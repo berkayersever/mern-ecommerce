@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Navbar as ReactNavbar } from 'react-bootstrap';
+import { Button, Image, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
+// import { Button, Nav, NavDropdown, MenuItem, NavItem, Form, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './Navbar.css';                                                                      // Import the css file for styling.
@@ -23,23 +26,43 @@ export class Navbar extends Component {
     render() {
         console.log(this.props.user);
         return (
-            <div className='nav container'>
-                <div className='desktop-nav'>
-                    {/* Make sure every link uses linkFunc, except the login link. */}
-                    <p className="nav-link" onClick={() => this.linkFunc('/')}>Home</p>
-                    <p className="nav-link" onClick={() => this.linkFunc('/about')}>About</p>
-                    <p className="nav-link" onClick={() => this.linkFunc('/cart')}>Cart</p>
-                    {/* Conditionally render the login button based if the user has data(it's login) else logout */}
-                    {/* Conditional render the user image if logged in. */}
-                    <div className="nav-link" onClick={() => this.props.user ? this.logout() : this.login()} >
-                        {this.props.user ?
-                            <div>
-                                <p>Logout</p>
-                                <img className='user-image' src={this.props.user.profile_picture} alt={this.props.user.nickname} />
-                            </div>
-                            : <p>Login</p>}
-                    </div>
-                </div>
+            <div>
+                <ReactNavbar bg="light" expand="lg">
+                    <ReactNavbar.Brand href="#home">PokéStore</ReactNavbar.Brand>
+                    <ReactNavbar.Toggle aria-controls="basic-navbar-nav" />
+                    <ReactNavbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link onClick={() => this.linkFunc('/')}>Home</Nav.Link>
+                            <Nav.Link onClick={() => this.linkFunc('/about')}>About</Nav.Link>
+                            <Nav.Link onClick={() => this.linkFunc('/cart')}>Cart</Nav.Link>
+
+                            <Nav.Link onClick={() => this.props.user ? this.logout() : this.login()}>
+                                {this.props.user ?
+                                    <Nav>Logout</Nav>
+                                    // <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />
+                                    : <Nav>Login</Nav>}
+                            </Nav.Link>
+
+                            <NavDropdown title="Profile" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                            {/*<Nav.Link onClick={() => this.props.user ? this.logout() : this.login()} >*/}
+                                {/*{this.props.user ?*/}
+                                        {/*<Nav.Link>Logout</Nav.Link>*/}
+                                        {/*// <Image src={this.props.user.profile_picture} alt={this.props.user.nickname} fluid />*/}
+                                    {/*: <Nav.Link>Login</Nav.Link>}*/}
+                            {/*</Nav.Link>*/}
+                        </Nav>
+                        <Form inline>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-success">Search</Button>
+                        </Form>
+                    </ReactNavbar.Collapse>
+                </ReactNavbar>
             </div>
         );
     }
