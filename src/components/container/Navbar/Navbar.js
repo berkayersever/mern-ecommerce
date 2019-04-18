@@ -26,7 +26,7 @@ export class Navbar extends Component {
     render() {
         console.log(this.props.user);
         return (
-            <div>
+            <React.Fragment>
                 <ReactNavbar bg="light" expand="lg">
                     <ReactNavbar.Brand href="#home">PokéStore</ReactNavbar.Brand>
                     <ReactNavbar.Toggle aria-controls="basic-navbar-nav" />
@@ -54,7 +54,7 @@ export class Navbar extends Component {
                         </Form>
                     </ReactNavbar.Collapse>
                 </ReactNavbar>
-            </div>
+            </React.Fragment>
         );
     }
 }
