@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DataSearch } from '@appbaseio/reactivesearch';
+import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
 import { withRouter } from 'react-router-dom';
 import { Navbar as ReactNavbar } from 'react-bootstrap';
 import { Button, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
