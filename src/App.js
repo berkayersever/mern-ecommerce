@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ReactiveBase } from '@appbaseio/reactivesearch';
 // import Home from'./components/container/Home/Home';
 import Navbar from'./components/container/Navbar/Navbar';
 import routes from './routes';
@@ -24,6 +25,9 @@ class App extends Component {
         return (
             <div className="App">
                 <Navbar></Navbar>
+                <ReactiveBase app="ecommerce" credentials="Y8gdzRhUs:4c6ec3b0-8fa1-41ad-8b71-bcd4401aba3f">
+                    Hello from Reactive Search!
+                </ReactiveBase>
                 {routes}
             </div>
         );
